@@ -17,14 +17,14 @@ def getKey():
 
 if __name__ == '__main__':
     settings = termios.tcgetattr(sys.stdin)
-    key_pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=1)
+    key_pub = rospy.Publisher('/lab_two_key', Twist, queue_size=1)
     rospy.init_node("keystroke_pub")
     # rate = rospy.Rate(100)
     # BEGIN TERMIOS
     old_attr = termios.tcgetattr(sys.stdin)
     tty.setcbreak(sys.stdin.fileno())
     # END TERMIOS
-    print "Publishing keystrokes. Press Ctrl-C to exit..."
+    print "Publishing keystrokes. Press 'o' to exit..."
     lin_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
     ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
     e = "Error"
@@ -44,6 +44,8 @@ if __name__ == '__main__':
             elif key_pressed == 'a' or key_pressed == 'A':
                 lin_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
                 ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(-0.05))
+            elif key_pressed == 'o' or key_pressed == 'O':
+                break
             else:
                 lin_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
                 ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
