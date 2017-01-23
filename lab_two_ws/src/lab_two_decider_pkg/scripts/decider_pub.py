@@ -18,20 +18,25 @@ randMsg = zeroMsg
 keyTime = time.time() - (timeout + 1)
 randTime = time.time() - (timeout + 1)
 
+# Initialize variables for new rx'd message
+newKey = 0
+newRand = 0
+
 # Callback for a key message
 def key_callback(data):
-  global keyTime, keyMsg
+  global keyTime, keyMsg, newKey
   keyTime = time.time()
   keyMsg = data
   rospy.loginfo("I heard key [%.2f,%.2f,%.2f] [%.2f,%.2f,%.2f], at %d", data.linear.x, data.linear.y, data.linear.z, data.angular.x, data.angular.y, data.angular.z, keyTime)
+  newKey = 1;
 
 # Callback for a random message
 def random_callback(data):
-  global randTime, randMsg
+  global randTime, randMsg, newRand
   randTime = time.time()
   randMsg = data
   rospy.loginfo("I heard random [%.2f,%.2f,%.2f] [%.2f,%.2f,%.2f], at %d", data.linear.x, data.linear.y, data.linear.z, data.angular.x, data.angular.y, data.angular.z, randTime)
-
+  newRand = 1;
 
 # Main Loop for node
 if __name__ == '__main__':
@@ -49,10 +54,12 @@ if __name__ == '__main__':
       currentTime = time.time()
       
       # Select what message should be sent
-      if((keyTime + timeout) > currentTime):
+      if(((keyTime + timeout) > currentTime) & (newKey == 1)):
+        newKey = 0
         pub.publish(keyMsg)
         rospy.loginfo("Send Key Message")
-      elif((randTime + timeout) > currentTime):
+      elif(((randTime + timeout) > currentTime) & (newRand == 1)):
+        newRand = 0
         pub.publish(randMsg)
         rospy.loginfo("Send Random Message")
       else:
