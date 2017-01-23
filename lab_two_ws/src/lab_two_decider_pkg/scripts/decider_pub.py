@@ -63,10 +63,10 @@ if __name__ == '__main__':
           pub.publish(zeroMsg) 
           rospy.loginfo("Send Release Message")
       elif(((randTime + timeout) > currentTime)):
-        if(newRand == 1):
-          newRand = 0
-          pub.publish(randMsg)
-          rospy.loginfo("Send Random Message")
+        #if(newRand == 1):
+        newRand = 0
+        pub.publish(randMsg)
+        rospy.loginfo("Send Random Message")
       else:
         pub.publish(zeroMsg) 
         rospy.loginfo("Send Zero Message")

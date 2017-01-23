@@ -17,7 +17,7 @@ def getKey():
 
 if __name__ == '__main__':
     settings = termios.tcgetattr(sys.stdin)
-    key_pub = rospy.Publisher('/lab_two_key', Twist, queue_size=1)
+    key_pub = rospy.Publisher('lab_two_key', Twist, queue_size=1)
     rospy.init_node("keystroke_pub")
     # rate = rospy.Rate(100)
     # BEGIN TERMIOS
@@ -33,17 +33,17 @@ if __name__ == '__main__':
             # BEGIN SELECT
             key_pressed = getKey()
             if key_pressed == 'w' or key_pressed == 'W':
-                lin_msg = Vector3(x=float(0.5), y=float(0.0), z=float(0.0))
+                lin_msg = Vector3(x=float(1.0), y=float(0.0), z=float(0.0))
                 ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
             elif key_pressed == 's' or key_pressed == 'S':
-                lin_msg = Vector3(x=float(-0.5), y=float(0.0), z=float(0.0))
+                lin_msg = Vector3(x=float(-1.0), y=float(0.0), z=float(0.0))
                 ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
             elif key_pressed == 'd' or key_pressed == 'D':
                 lin_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
-                ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.05))
+                ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(-1.0))
             elif key_pressed == 'a' or key_pressed == 'A':
                 lin_msg = Vector3(x=float(0.0), y=float(0.0), z=float(0.0))
-                ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(-0.05))
+                ang_msg = Vector3(x=float(0.0), y=float(0.0), z=float(1.0))
             elif key_pressed == 'o' or key_pressed == 'O':
                 break
             else:

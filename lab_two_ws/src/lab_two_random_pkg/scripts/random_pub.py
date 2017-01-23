@@ -10,9 +10,9 @@ def randomPublisher():
   rospy.init_node('random_pub', anonymous=True)
   rate = rospy.Rate(5)
   while not rospy.is_shutdown():
-    rate = rospy.Rate(1/(0.1 * random.uniform(1,10)))
-    linear_velocity = Vector3(x=random.uniform(-2,2), y=float(0.0), z=float(0.0))
-    angular_velocity = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(-3,3))
+    rate = rospy.Rate(1/(0.1 * random.uniform(5,50)))
+    linear_velocity = Vector3(x=random.uniform(-1,1), y=float(0.0), z=float(0.0))
+    angular_velocity = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(-1,1))
     publish_msg = Twist(linear=linear_velocity, angular=angular_velocity)
     rospy.loginfo('Linear Velocity: %.2f'%linear_velocity.x)
     rospy.loginfo('Angular Velocity: %.2f'%angular_velocity.z)
