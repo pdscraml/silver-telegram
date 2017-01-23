@@ -41,4 +41,11 @@
   <param name="use_gui" value="true"/>
   <arg name="rvizconfig" default="robot" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jackal_viz)/rviz/$(arg rvizconfig).rviz" />
+  
+  <group ns="lab_two">
+    <node pkg="lab_two_key_pkg" name="Keystroke" type="keystroke_pub.py" output="screen" launch-prefix="xterm -e"/>
+    <node pkg="lab_two_random_pkg" name="Random" type="random_pub.py"/>
+    <node pkg="lab_two_decider_pkg" name="Decider" type="decider_pub.py"/>
+  </group>
+  
 </launch>
