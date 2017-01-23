@@ -17,7 +17,7 @@ def getKey():
 
 if __name__ == '__main__':
     settings = termios.tcgetattr(sys.stdin)
-    key_pub = rospy.Publisher('/user_topic', Twist, queue_size=1)
+    key_pub = rospy.Publisher('/lab_two_key', Twist, queue_size=1)
     rospy.init_node("keystroke_pub")
     # rate = rospy.Rate(100)
     # BEGIN TERMIOS
