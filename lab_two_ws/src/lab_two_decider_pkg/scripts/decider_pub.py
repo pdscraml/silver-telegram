@@ -54,14 +54,16 @@ if __name__ == '__main__':
       currentTime = time.time()
       
       # Select what message should be sent
-      if(((keyTime + timeout) > currentTime) & (newKey == 1)):
-        newKey = 0
-        pub.publish(keyMsg)
-        rospy.loginfo("Send Key Message")
-      elif(((randTime + timeout) > currentTime) & (newRand == 1)):
-        newRand = 0
-        pub.publish(randMsg)
-        rospy.loginfo("Send Random Message")
+      if(((keyTime + timeout) > currentTime)):
+        if(newKey == 1):
+          newKey = 0
+          pub.publish(keyMsg)
+          rospy.loginfo("Send Key Message")
+      elif(((randTime + timeout) > currentTime)):
+        if(newRand == 1):
+          newRand = 0
+          pub.publish(randMsg)
+          rospy.loginfo("Send Random Message")
       else:
         pub.publish(zeroMsg) 
         rospy.loginfo("Send Zero Message")
