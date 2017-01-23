@@ -59,6 +59,9 @@ if __name__ == '__main__':
           newKey = 0
           pub.publish(keyMsg)
           rospy.loginfo("Send Key Message")
+        else:
+          pub.publish(zeroMsg) 
+          rospy.loginfo("Send Release Message")
       elif(((randTime + timeout) > currentTime)):
         if(newRand == 1):
           newRand = 0
