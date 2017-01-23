@@ -48,7 +48,7 @@ if __name__ == '__main__':
     
     # Initialize ros node
     rospy.init_node('decider', anonymous=True)
-    rate = rospy.Rate(5)
+    rate = rospy.Rate(50)
   
     while not rospy.is_shutdown():
       currentTime = time.time()
