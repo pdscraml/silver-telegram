@@ -8,7 +8,7 @@
 # Intro to Robotics - EE5900 - Spring 2017
 #          Assignment #2
 
-#       Project Group #1
+#       Project Group #4
 #	Phillip Scramlin (Team Lead)
 #	Derek Chopp 
 #	Roger Gomes
