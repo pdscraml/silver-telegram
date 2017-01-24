@@ -19,20 +19,36 @@ from geometry_msgs.msg import Twist, Vector3
 import random
 
 def randomPublisher():
-  pub = rospy.Publisher('lab_two_random', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
+  #pub = rospy.Publisher('lab_two_random', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
+  pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
   rospy.init_node('random_pub', anonymous=True) #Intialize the node
   while not rospy.is_shutdown():
     #Define a random rate of publishing the message	
-    rate = rospy.Rate(1/(0.1 * random.uniform(5,50)))
-    #Define the linear and angular messages
+    rate = rospy.Rate(1/(0.1 * random.uniform(5,20)))
+    #Define the linear and angular messages - First was change in linear orientation
     linear_msg = Vector3(x=random.uniform(-1,1), y=float(0.0), z=float(0.0))
-    angular_msg = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(-1,1))
-    #Publish the linear and angular comments
+    angular_msg = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(0,0))
+    #Intialize the twist messgae to be sent for change in linear orientation
     publish_msg = Twist(linear=linear_msg, angular=angular_msg)
     #Log the published Linear and angular velocity messages
     rospy.loginfo('Linear Velocity Msg: %.2f'%linear_msg.x)
     rospy.loginfo('Angular Velocity Msg: %.2f'%angular_msg.z)
+    #Publish change in linear orientation
     pub.publish(publish_msg)
+    #Sleep for random time
+    rate.sleep()
+
+    #Define the linear and angular messages - Change in angular orientation
+    linear_msg = Vector3(x=random.uniform(0,0), y=float(0.0), z=float(0.0))
+    angular_msg = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(-1,1))
+    #ntialize the twist messgae to be sent for change in angular orientation
+    publish_msg = Twist(linear=linear_msg, angular=angular_msg)
+    #Log the published Linear and angular velocity messages
+    rospy.loginfo('Linear Velocity Msg: %.2f'%linear_msg.x)
+    rospy.loginfo('Angular Velocity Msg: %.2f'%angular_msg.z)
+    #Publish change in angular orientation
+    pub.publish(publish_msg)
+    #Sleep for random time
     rate.sleep()
 
 if __name__ == '__main__':
