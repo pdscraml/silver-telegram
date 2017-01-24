@@ -19,12 +19,11 @@ from geometry_msgs.msg import Twist, Vector3
 import random
 
 def randomPublisher():
-  #pub = rospy.Publisher('lab_two_random', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
-  pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
+  pub = rospy.Publisher('lab_two_random', Twist, queue_size=10) #Intialize the publisher and topic to which the node publishes
   rospy.init_node('random_pub', anonymous=True) #Intialize the node
   while not rospy.is_shutdown():
     #Define a random rate of publishing the message	
-    rate = rospy.Rate(1/(0.1 * random.uniform(5,20)))
+    rate = rospy.Rate(1/(0.1 * random.uniform(5,25)))
     #Define the linear and angular messages - First was change in linear orientation
     linear_msg = Vector3(x=random.uniform(-1,1), y=float(0.0), z=float(0.0))
     angular_msg = Vector3(x=float(0.0), y=float(0.0), z=random.uniform(0,0))
