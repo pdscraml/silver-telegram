@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-#!/usr/bin/env python
-
 # Node Description: Random Publisher Node publishes random linear and angular  
 # messages of  sthe messagte type geometry_msgs to the topic 'lab_two_random'
 # The rate at which the publisher publishes is also random for the
